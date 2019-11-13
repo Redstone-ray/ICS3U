@@ -18,7 +18,7 @@ public class Snippet {
 		DataInputStream input = new DataInputStream(System.in);
 		String choice;
 		double bankBalance, intRate, endingBal;
-		int number;
+		int number, age;
 		NumberFormat d = new DecimalFormat("#0.00");
 		NumberFormat e = new DecimalFormat("#0.00");
 		Random rand = new Random();
@@ -46,7 +46,7 @@ public class Snippet {
 		//apply the bank balance
 		bankBalance=obj.getRandomList(list);
 		//prompte the use to enter starting balance
-		System.out.println("Your started at the age of 20, with a balance of: $" +bankBalance);
+		System.out.println("Your started at the age of "+age+", with a balance of: $" +bankBalance);
 		//randomly generate the intRate
 		intRate = 1.5 + (5.5 - 2.5) * startingRate.nextDouble();
 		System.out.print("Your rate of interest is "+e.format(intRate)+ "%, good luck!");
@@ -63,7 +63,7 @@ public class Snippet {
 			//
 			//
 			System.out.println(
-					"Whould you like to play lottery for 200 dollors? Winning will double your interest rate y/n");
+					"Would you like to play lottery for 200 dollors? Winning will double your interest rate y/n");
 			choice = input.readLine();
 			if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
 				endingBal -= 200;
