@@ -15,7 +15,7 @@ public class Snippet {
 		DataInputStream input = new DataInputStream(System.in);
 		String choice;
 		double bankBalance, intRate, endingBal;
-		int number, age = 20;
+		int number, ageToTrade=0;
 		NumberFormat d = new DecimalFormat("#0.00");
 		NumberFormat e = new DecimalFormat("#0.00");
 		Random rand = new Random();
@@ -41,15 +41,44 @@ public class Snippet {
 
 		// apply the bank balance
 		bankBalance = obj.getRandomList(list);
+
+		//random starting age
+		List<Integer> ageAtStart = new ArrayList<>();
+		ageAtStart.add(16);
+		ageAtStart.add(18);
+		ageAtStart.add(20);
+		ageAtStart.add(24);
+		ageAtStart.add(27);
+		ageAtStart.add(30);
+		Snippet startAgeObject=new Snippet();
+		//applys the age
+		int age = startAgeObject.getRandomAge(ageAtStart);
 		// prompte the use to enter starting balance
 		System.out.println("Your started at the age of " + age + ", with a balance of: $" + bankBalance);
-		// randomly generate the intRate
-		intRate = 1.5 + (5.5 - 2.5) * startingRate.nextDouble();
-		System.out.println("Your rate of interest is " + e.format(intRate) + "%, good luck!");
-		endingBal = bankBalance + bankBalance * (intRate / 100);
-		for (int i = 20; i <= 80; i++) {
 
-			System.out.println("The balance at age " + i + " is " + d.format(endingBal));
+		// randomly generate the intRate
+		intRate = 2.5 + (8.5 - 2.5) * startingRate.nextDouble();
+		System.out.println("Your rate of interest is " + e.format(intRate) + "%, good luck!");
+
+		//Trade age for extra starting interst rate
+		System.out.println("Would you like to trade of x years of age for "+intRate+ "+x percent of intrest rate? To a maxmium of 5 years");
+		System.out.println("A number between 0-5 indicates the age you wants to trade of");
+		ageToTrade=Integer.parseInt(input.readLine());
+		if (ageToTrade>=1 && ageToTrade<=5) {
+			intRate+=ageToTrade;
+			age+=ageToTrade;
+			//show a message of new age if the user input a ageToTrade>0
+			System.out.println("Sucess, your new interest is now:"+d.format(intRate)+"%");
+		}
+		else if (ageToTrade==0) {
+			System.out.println("Ok, continue without trading age");
+		}
+
+		endingBal = bankBalance + bankBalance * (intRate / 100);
+
+		while (age<= 80) {
+
+			System.out.println("The balance at age " + age + " is " + d.format(endingBal));
 			endingBal = endingBal + endingBal * (intRate / 100);
 
 			// stock system
@@ -73,7 +102,7 @@ public class Snippet {
 				System.out.println("You don't have enough money! Poor you!");
 
 			} else {
-				System.out.println("Okay, proceed to year " + (i + 1));
+				System.out.println("Okay, you are now " + (age + 1));
 
 			}
 			// end of stock system
@@ -121,4 +150,12 @@ public class Snippet {
 		int index = ThreadLocalRandom.current().nextInt(list.size());
 		return list.get(index);
 	}
+	public int getRandomAge(List<Integer> age) {
+
+		// 0-5
+		int index = ThreadLocalRandom.current().nextInt(age.size());
+		return age.get(index);
+	}
 }
+
+
