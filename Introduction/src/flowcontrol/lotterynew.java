@@ -61,7 +61,7 @@ public class Snippet {
 		System.out.println("Your rate of interest is " + e.format(intRate) + "%, good luck!");
 
 		//Trade age for extra starting interst rate
-		System.out.println("Would you like to trade of x years of age for "+intRate+ "+x percent of intrest rate? To a maxmium of 5 years");
+		System.out.println("Would you like to trade of x years of age for "+d.format(intRate)+ " + x percent of intrest rate? To a maxmium of 5 years");
 		System.out.println("A number between 0-5 indicates the age you wants to trade of");
 		ageToTrade=Integer.parseInt(input.readLine());
 		if (ageToTrade>=1 && ageToTrade<=5) {
