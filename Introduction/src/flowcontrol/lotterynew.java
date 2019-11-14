@@ -15,7 +15,7 @@ public class Snippet {
 		DataInputStream input = new DataInputStream(System.in);
 		String choice, choiceStock;
 		double bankBalance, intRate, endingBal, trumpStock;
-		int number, ageToTrade=0,trumpStockNumber;
+		int number, ageToTrade=0,trumpStockNumber=0;
 		NumberFormat d = new DecimalFormat("#0.00");
 		NumberFormat e = new DecimalFormat("#0.00");
 		Random rand = new Random();
@@ -70,6 +70,7 @@ public class Snippet {
 			age+=ageToTrade;
 			//show a message of new age if the user input a ageToTrade>0
 			System.out.println("Sucess, your new interest is now:"+d.format(intRate)+"%");
+			System.out.println(ageToTrade+" years had been added to your age, you are now "+age);
 		}
 		else if (ageToTrade==0) {
 			System.out.println("Ok, continue without trading age");
@@ -78,7 +79,7 @@ public class Snippet {
 		endingBal = bankBalance + bankBalance * (intRate / 100);
 
 		//set a value for trumpstock, stock 1
-		trumpStock  = 24.5 + (103.5 - 24.5) * stockUse.nextDouble();
+		trumpStock  = 125.5 + (603.5 - 125.5) * stockUse.nextDouble();
 
 		while (age<= 80) {
 
@@ -115,6 +116,7 @@ public class Snippet {
 
 
 			//Start of stock system
+			System.out.println("You have "+trumpStockNumber+" trumpStock on your account;");
 			System.out.println("Would you like to purchase stocks? Y/N");
 			choiceStock=input.readLine();
 			double stockIncreaseDecrease = rand.nextInt(8);
@@ -155,7 +157,9 @@ public class Snippet {
 				{
 					plusOrMinus="-10%";
 				}
-				System.out.println("1.TrumpStock\t"+trumpStock+"\t"+plusOrMinus);
+				
+				System.out.println("1.TrumpStock\t"+d.format(trumpStock)+"\t"+plusOrMinus);
+				System.out.println("*******************");
 				System.out.println("Buy or sell? b/s");
 				int buyOrSellAmount;
 				String buyOrSell=input.readLine();
@@ -163,9 +167,34 @@ public class Snippet {
 				if (buyOrSell.equalsIgnoreCase("b")) {
 					System.out.print("Input buy amount:");
 					buyOrSellAmount=Integer.parseInt(input.readLine());
+					//check for enough money
+					if (buyOrSellAmount>0 && endingBal<=trumpStock*buyOrSellAmount) {
 					endingBal=endingBal-(trumpStock*buyOrSellAmount);
+					trumpStockNumber+=buyOrSellAmount;
+					System.out.println("Sucess, you purchased "+buyOrSellAmount+" stocks");
+					System.out.println("You now have "+trumpStockNumber+ "stocks");
+					}
+					else {
+						System.out.println("Invaild number, you might not have enough money");
+					}
 				}
-				System.out.println("*******************");
+				else if (buyOrSell.equalsIgnoreCase("s")) {
+					System.out.print("Input sell amount:");
+					buyOrSellAmount=Integer.parseInt(input.readLine());
+					if (trumpStockNumber<=buyOrSellAmount){
+						endingBal=endingBal+(trumpStock*buyOrSellAmount);
+						trumpStockNumber-=buyOrSellAmount;
+						System.out.println("Sucess, you sold "+buyOrSellAmount+" stocks");
+						System.out.println("You now have "+trumpStockNumber+ "stocks");
+					}
+					else {
+					System.out.println("Sorry, that is an invaild number, please enter a number between 0 and "+trumpStockNumber);
+				}
+					}
+				else {
+						System.out.println("Invaild input, b/s are the only accepted input, processed to next year");
+					}
+				
 			}
 			System.out.println("-----------------------------------------");
 			System.out.println("You have reached the level:");
