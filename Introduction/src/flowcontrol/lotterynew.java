@@ -140,6 +140,7 @@ public class Snippet {
 				System.out.println("You win the game!");
 			}
 			System.out.println("-----------------------------------------");
+			age++
 		}
 
 	}
