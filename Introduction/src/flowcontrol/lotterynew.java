@@ -15,7 +15,7 @@ public class Snippet {
 		DataInputStream input = new DataInputStream(System.in);
 		String choice, choiceStock;
 		double bankBalance, intRate, endingBal, trumpStock;
-		int number, ageToTrade=0;
+		int number, ageToTrade=0,trumpStockNumber;
 		NumberFormat d = new DecimalFormat("#0.00");
 		NumberFormat e = new DecimalFormat("#0.00");
 		Random rand = new Random();
