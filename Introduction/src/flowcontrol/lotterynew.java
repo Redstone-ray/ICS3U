@@ -13,13 +13,14 @@ public class Snippet {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException {
 		DataInputStream input = new DataInputStream(System.in);
-		String choice;
-		double bankBalance, intRate, endingBal;
+		String choice, choiceStock;
+		double bankBalance, intRate, endingBal, trumpStock;
 		int number, ageToTrade=0;
 		NumberFormat d = new DecimalFormat("#0.00");
 		NumberFormat e = new DecimalFormat("#0.00");
 		Random rand = new Random();
 		Random startingRate = new Random();
+		Random stockUse = new Random();
 
 		// Starting balance
 		List<Integer> list = new ArrayList<>();
@@ -76,12 +77,15 @@ public class Snippet {
 
 		endingBal = bankBalance + bankBalance * (intRate / 100);
 
+		//set a value for trumpstock, stock 1
+		trumpStock  = 24.5 + (103.5 - 24.5) * stockUse.nextDouble();
+
 		while (age<= 80) {
 
 			System.out.println("The balance at age " + age + " is " + d.format(endingBal));
 			endingBal = endingBal + endingBal * (intRate / 100);
 
-			// stock system
+			// lottery system
 			//
 			//
 			System.out.print(
@@ -90,7 +94,7 @@ public class Snippet {
 			if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
 				endingBal -= 200;
 				double n = rand.nextInt(5);
-				System.out.println("Please enter a Natural Number between 1-5");
+				System.out.println("Please enter a Natural Number between 0-5");
 				number = Integer.parseInt(input.readLine());
 				if (number == n) {
 					intRate += intRate;
@@ -102,13 +106,67 @@ public class Snippet {
 				System.out.println("You don't have enough money! Poor you!");
 
 			} else {
-				System.out.println("Okay, you are now " + (age + 1));
+				System.out.println("Okay, no lottery");
 
 			}
-			// end of stock system
+			// end of lottery system
 			//
 			//
 
+
+			//Start of stock system
+			System.out.println("Would you like to purchase stocks? Y/N");
+			choiceStock=input.readLine();
+			double stockIncreaseDecrease = rand.nextInt(8);
+			double stockChangeAmount=0.0 + (0.10 - 0.0) * stockUse.nextDouble();
+			if (stockIncreaseDecrease<=3) {
+				//increase the stock by percent
+				trumpStock+=trumpStock*stockChangeAmount;
+			}
+			else if (stockIncreaseDecrease<=7) {
+				//decrease the stock
+				trumpStock-=trumpStock*stockChangeAmount;
+			}
+			else if (stockIncreaseDecrease==8)
+			{
+				trumpStock=trumpStock*1.1;
+			}
+			else {
+				trumpStock=trumpStock*0.9;
+			}
+			String plusOrMinus="";
+			if(choiceStock.equalsIgnoreCase("y")) {
+				System.out.println("*******************");
+				System.out.println("Here are the current stock(s) open today");
+				System.out.println();
+				System.out.println("Stockname\tprice\tchange");
+				//Show percent increase/decrease
+				if (stockIncreaseDecrease<=3) {
+					plusOrMinus="+"+d.format(stockChangeAmount*100)+"%";
+				}
+				else if (stockIncreaseDecrease<=7) {
+					plusOrMinus="-"+d.format(stockChangeAmount*100)+"%";
+				}
+				else if (stockIncreaseDecrease==8)
+				{
+					plusOrMinus="+10%";
+				}
+				else if (stockIncreaseDecrease==9)
+				{
+					plusOrMinus="-10%";
+				}
+				System.out.println("1.TrumpStock\t"+trumpStock+"\t"+plusOrMinus);
+				System.out.println("Buy or sell? b/s");
+				int buyOrSellAmount;
+				String buyOrSell=input.readLine();
+				//buy, add current amount of stock
+				if (buyOrSell.equalsIgnoreCase("b")) {
+					System.out.print("Input buy amount:");
+					buyOrSellAmount=Integer.parseInt(input.readLine());
+					endingBal=endingBal-(trumpStock*buyOrSellAmount);
+				}
+				System.out.println("*******************");
+			}
 			System.out.println("-----------------------------------------");
 			System.out.println("You have reached the level:");
 			if (endingBal <= 50) {
@@ -157,6 +215,7 @@ public class Snippet {
 		int index = ThreadLocalRandom.current().nextInt(age.size());
 		return age.get(index);
 	}
+
 }
 
 
