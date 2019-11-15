@@ -2,7 +2,6 @@ package flowcontrol;
 
 import static java.lang.System.in;
 import static java.lang.System.out;
-
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -18,7 +17,7 @@ public class Snippet {
 		DataInputStream input = new DataInputStream(in);
 		String choice, choiceStock;
 		double bankBalance, intRate, endingBal, trumpStock;
-		int number, ageToTrade=0,trumpStockNumber=0;
+		int number, ageToTrade,trumpStockNumber=0;
 		NumberFormat d = new DecimalFormat("#0.00");
 		//what's the point of this?
 		NumberFormat e = new DecimalFormat("#0.00");
@@ -26,7 +25,7 @@ public class Snippet {
 		Random rand = new Random();
 		Random startingRate = new Random();
 		Random stockUse = new Random();
-		String yesorno = "";
+		String yesorno;
 		int waiter= 0;
 
 		// Starting balance
@@ -77,7 +76,7 @@ public class Snippet {
 			age+=ageToTrade;
 			//show a message of new age if the user input a ageToTrade>0
 			System.out.println("Success, your new interest is now: "+d.format(intRate)+"%");
-			System.out.println(ageToTrade+" years had been added to your age, you are now "+age);
+			System.out.println(ageToTrade+" year(s) had been added to your age, you are now "+age);
 		}
 		else if (ageToTrade==0) {
 			System.out.println("Ok, continue without trading age");
@@ -275,10 +274,11 @@ public class Snippet {
 						lvl = "Donald Trump";
 					} else {
 						System.out.println("Use 'y' for Yes and 'n' for no");
-				}	
-			}
+					}
 
-		}
+				}
+
+			}
 			else {
 				System.out.println("Lvl MAX: Donald Trump");
 				lvl = "Donald Trump";
@@ -293,7 +293,6 @@ public class Snippet {
 			System.out.println("-----------------------------------------");
 			age++;
 		}
-
 	}
 	public int getRandomList(List<Integer> list) {
 
