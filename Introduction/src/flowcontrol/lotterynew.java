@@ -24,7 +24,9 @@ public class Snippet {
 		Random startingRate = new Random();
 		Random stockUse = new Random();
 		String yesorno, heal, heal2;
+		//Double Check System Variables
 		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2;
+		//More Double Check Variables and Health Variables
 		int waitBuy, waitSell, health = 100, hpCheck = 0;
 
 		// Starting balance
@@ -98,6 +100,7 @@ public class Snippet {
 			if (health < 100) {
 				waitHeal = 0;
 				waitHeal2 = 0;
+				//asks to heal
 				while (waitHeal == 0) {
 					System.out.print("Do you wish to heal yourself? (Y/N): ");
 					heal = input.readLine();
@@ -107,7 +110,7 @@ public class Snippet {
 						heal2 = input.readLine();
 						while (waitHeal2 == 0) {
 							if (heal2.equalsIgnoreCase("y")) {
-								endingBal = endingBal - ((100 - health) * (5 * age));
+								endingBal = endingBal - ((100 - health) * (10 * age));
 								health = 100;
 								waitHeal2 = 1;
 								System.out.println("OK\nYour Health is now at " + health);
@@ -126,6 +129,9 @@ public class Snippet {
 					}
 				}
 			}
+			// End of Healing System
+
+
 			// lottery system
 			//
 			//
@@ -282,7 +288,7 @@ public class Snippet {
 			String lvl = "";
 			int lvlmon = 0;
 
-
+			//Determines Level
 			if (endingBal <= 50) {
 				System.out.println("Lvl 1: Slave");
 				lvl = "Poor";
@@ -353,7 +359,6 @@ public class Snippet {
 				System.out.println("Lvl MAX: Donald Trump");
 				lvl = "Donald Trump";
 			}
-
 			if (lvl.equals("Donald Trump")) {
 				System.out.println("");
 			} else {
