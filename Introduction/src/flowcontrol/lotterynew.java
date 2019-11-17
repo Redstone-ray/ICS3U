@@ -105,7 +105,7 @@ public class Snippet {
 					System.out.print("Do you wish to heal yourself? (Y/N): ");
 					heal = input.readLine();
 					if (heal.equalsIgnoreCase("y")) {
-						System.out.print("Healing will cost $" + ((100 - health) * (5 * age)) + "(Y/N): ");
+						System.out.print("Healing will cost $" + ((100 - health) * (10 * age)) + "(Y/N): ");
 						waitHeal = 1;
 						heal2 = input.readLine();
 						while (waitHeal2 == 0) {
