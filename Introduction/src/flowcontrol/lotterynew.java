@@ -27,7 +27,7 @@ public class Snippet {
 		//Double Check System Variables
 		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2;
 		//More Double Check Variables and Health Variables
-		int waitBuy, waitSell, health = 100, hpCheck = 0;
+		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0;
 
 		// Starting balance
 		List<Integer> list = new ArrayList<>();
@@ -92,9 +92,17 @@ public class Snippet {
 		trumpStock = 125.5 + (603.5 - 125.5) * stockUse.nextDouble();
 
 		while (age <= 80) {
-
 			System.out.println("The balance at age " + age + " is $" + d.format(endingBal));
 			endingBal = endingBal + endingBal * (intRate / 100);
+			//Cancer
+			if (age >= 55 && sick == 0) {
+				int sickRand = (int) (Math.random() * 15 + 1);
+				if (sickRand == 5) {
+					System.out.println("You now have an incurable disease, you will lose 20 HP every year");
+					sick = 1;
+				}
+			}
+
 			//Healing System
 			System.out.println("Your HP is currently at " + health);
 			if (health < 100) {
@@ -111,9 +119,15 @@ public class Snippet {
 						while (waitHeal2 == 0) {
 							if (heal2.equalsIgnoreCase("y")) {
 								endingBal = endingBal - ((100 - health) * (10 * age));
-								health = 100;
-								waitHeal2 = 1;
-								System.out.println("OK\nYour Health is now at " + health);
+								if (endingBal < 0) {
+									waitHeal2 = 1;
+									System.out.println("You don't have enough money");
+									endingBal = endingBal + ((100 - health) * (10 * age));
+								} else {
+									health = 100;
+									waitHeal2 = 1;
+									System.out.println("OK\nYour Health is now at " + health);
+								}
 							} else if (heal2.equalsIgnoreCase("n")) {
 								System.out.println("OK");
 								waitHeal2 = 1;
@@ -282,6 +296,18 @@ public class Snippet {
 					System.out.println("Please only enter 'Y' for Yes and 'N' for No");
 				}
 			}
+			//Sick System
+			if (sick == 1) {
+				health = health - 20;
+			}
+			//Did you Die?
+			if (health <= 0) {
+				System.out.println("");
+				System.out.println("You ran out of HP!\nYou Lost!");
+				System.exit(0);
+			}
+
+
 			System.out.println("-----------------------------------------");
 			System.out.println("You have reached the level:");
 
