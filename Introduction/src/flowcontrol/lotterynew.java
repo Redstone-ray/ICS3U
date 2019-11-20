@@ -9,13 +9,15 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Snippet {
+
+public class Lottery {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException {
-		DataInputStream input = new DataInputStream(in);
-		String choice, choiceStock;
+		Scanner input= new Scanner(System.in);
+		String choice;
 		double bankBalance, intRate, endingBal, trumpStock;
 		int number, ageToTrade, trumpStockNumber = 0;
 		NumberFormat d = new DecimalFormat("#0.00");
@@ -45,7 +47,7 @@ public class Snippet {
 		list.add(5000);
 		list.add(10000);
 		// randomly select an amount from the array list
-		Snippet obj = new Snippet();
+		Lottery obj = new Lottery();
 
 		// apply the bank balance
 		bankBalance = obj.getRandomList(list);
@@ -58,7 +60,7 @@ public class Snippet {
 		ageAtStart.add(24);
 		ageAtStart.add(27);
 		ageAtStart.add(30);
-		Snippet startAgeObject = new Snippet();
+		Lottery startAgeObject = new Lottery();
 		//applys the age
 		int age = startAgeObject.getRandomAge(ageAtStart);
 		// prompt the use to enter starting balance
@@ -75,7 +77,7 @@ public class Snippet {
 		//Trade age for extra starting interest rate
 		System.out.println("Would you like to trade some years of your life for " + d.format(intRate) + "% plus higher percent of interest rate? (To a maximum of 5 years)");
 		System.out.print("A number between 0-5 indicates the age you want to trade off: ");
-		ageToTrade = Integer.parseInt(input.readLine());
+		ageToTrade = input.nextInt();
 		if (ageToTrade >= 1 && ageToTrade <= 5) {
 			intRate += ageToTrade;
 			age += ageToTrade;
@@ -96,7 +98,7 @@ public class Snippet {
 			endingBal = endingBal + endingBal * (intRate / 100);
 			//Cancer
 			if (age >= 55 && sick == 0) {
-				int sickRand = (int) (Math.random() * 15 + 1);
+				int sickRand = (rand.nextInt(14)+1);
 				if (sickRand == 5) {
 					System.out.println("You now have an incurable disease, you will lose 20 HP every year");
 					sick = 1;
@@ -111,11 +113,11 @@ public class Snippet {
 				//asks to heal
 				while (waitHeal == 0) {
 					System.out.print("Do you wish to heal yourself? (Y/N): ");
-					heal = input.readLine();
+					heal = input.nextLine();
 					if (heal.equalsIgnoreCase("y")) {
 						System.out.print("Healing will cost $" + ((100 - health) * (10 * age)) + "(Y/N): ");
 						waitHeal = 1;
-						heal2 = input.readLine();
+						heal2 = input.nextLine();
 						while (waitHeal2 == 0) {
 							if (heal2.equalsIgnoreCase("y")) {
 								endingBal = endingBal - ((100 - health) * (10 * age));
@@ -153,13 +155,13 @@ public class Snippet {
 			System.out.println("");
 			System.out.print("Would you like to play lottery for $200?\nWinning will double your interest rate (Y/N): ");
 			while (waitLot == 0) {
-				choice = input.readLine();
+				choice = input.nextLine();
 				if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
 					endingBal -= 200;
 					waitLot = 1;
-					double n = rand.nextInt(5);
-					System.out.print("Please enter a Natural Number between 0-5: ");
-					number = Integer.parseInt(input.readLine());
+					double n = (rand.nextInt(4)+1);
+					System.out.print("Please enter a Natural Number between 1-5: ");
+					number = input.nextInt();
 					//Health Loss due to winning Lottery 2 or more times in a row
 					if (number == n) {
 						intRate += intRate;
@@ -199,9 +201,7 @@ public class Snippet {
 			waitStock = 0;
 			waitStock2 = 0;
 			System.out.println("You have " + trumpStockNumber + " trumpStock(s) on your account");
-			System.out.print("Would you like to purchase stocks? (Y/N): ");
 			while (waitStock == 0) {
-				choiceStock = input.readLine();
 				double stockIncreaseDecrease = rand.nextInt(8);
 				double stockChangeAmount = 0.0 + (0.10 - 0.0) * stockUse.nextDouble();
 				if (stockIncreaseDecrease <= 3) {
@@ -216,7 +216,6 @@ public class Snippet {
 					trumpStock = trumpStock * 0.9;
 				}
 				String plusOrMinus = "";
-				if (choiceStock.equalsIgnoreCase("y")) {
 					waitStock = 1;
 					System.out.println("*******************");
 					System.out.println("Here are the current stock(s) open today");
@@ -234,18 +233,18 @@ public class Snippet {
 					}
 					waitBuy = 0;
 					waitSell = 0;
-					System.out.println("1.TrumpStock\t$" + d.format(trumpStock) + "\t" + plusOrMinus);
+					System.out.println("1.TrumpStock\t" +"\t$"+ d.format(trumpStock) + "\t" + plusOrMinus);
 					System.out.println("*******************");
 					System.out.print("Press 'B' for buy, 'S' for sell, enter 'N' to proceed to the next year: ");
 					int buyOrSellAmount;
 					while (waitStock2 == 0) {
-						String buyOrSell = input.readLine();
+						String buyOrSell = input.nextLine();
 						//buy, add current amount of stock
 						if (buyOrSell.equalsIgnoreCase("b")) {
 							waitStock2 = 1;
 							System.out.print("Input buy amount(number of stocks)(Enter 0 to cancel): ");
 							while (waitBuy == 0) {
-								buyOrSellAmount = Integer.parseInt(input.readLine());
+								buyOrSellAmount = input.nextInt();
 								//check for enough money
 								if (buyOrSellAmount > 0 && endingBal >= trumpStock * buyOrSellAmount) {
 									endingBal = endingBal - trumpStock * buyOrSellAmount;
@@ -267,7 +266,7 @@ public class Snippet {
 								System.out.print("Input sell amount(number of stocks)(Enter 0 to cancel): ");
 								waitStock2 = 1;
 								while (waitSell == 0) {
-									buyOrSellAmount = Integer.parseInt(input.readLine());
+									buyOrSellAmount = input.nextInt();
 									if (trumpStockNumber >= buyOrSellAmount) {
 										endingBal = endingBal + trumpStock * buyOrSellAmount;
 										trumpStockNumber -= buyOrSellAmount;
@@ -289,12 +288,7 @@ public class Snippet {
 							System.out.println("Please only enter 'B', 'S' or 'N'");
 						}
 					}
-				} else if (choiceStock.equalsIgnoreCase("n")) {
-					waitStock = 1;
-					System.out.println("OK, proceeding to next year");
-				} else {
-					System.out.println("Please only enter 'Y' for Yes and 'N' for No");
-				}
+				
 			}
 			//Sick System
 			if (sick == 1) {
@@ -369,7 +363,7 @@ public class Snippet {
 				System.out.println("You win the game!");
 				System.out.print("Continue? Y/N: ");
 				while (waiter == 0) {
-					yesorno = input.readLine();
+					yesorno = input.nextLine();
 					if (yesorno.equalsIgnoreCase("n")) {
 						System.exit(0);
 					} else if
