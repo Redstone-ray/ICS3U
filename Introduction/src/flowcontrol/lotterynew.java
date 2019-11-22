@@ -25,7 +25,7 @@ public class Lottery {
 		//Double Check System Variables
 		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2, iq;
 		//More Double Check Variables and Health Variables
-		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0;
+		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck;
 
 		// Starting balance
 		List<Integer> list = new ArrayList<>();
@@ -45,9 +45,9 @@ public class Lottery {
 		// randomly select an amount from the array list
 		Lottery obj = new Lottery();
 
-		// apply the IQ
 		bankBalance = obj.getRandomList(list);
-		// Starting balance
+		
+		//IQ
 		List<Integer> iqAtStart = new ArrayList<>();
 		iqAtStart.add(30);
 		iqAtStart.add(60);
@@ -179,8 +179,12 @@ public class Lottery {
 				if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
 					endingBal -= 200;
 					waitLot = 1;
+					if(iq == 30) {
 					double n = (rand.nextInt(9)+1);
-					System.out.print("Please enter a Natural Number between 1-10: ");
+					luck = 10;
+					}
+					System.out.print("Please enter a Natural Number between 1-"+luck+":" );
+					}
 					number = input.nextInt();
 					//Health Loss due to winning Lottery 2 or more times in a row
 					if (number == n) {
@@ -213,6 +217,7 @@ public class Lottery {
 					System.out.println("Please only use 'Y' for Yes and 'N' for No");
 				}
 			}
+			
 			// end of lottery system
 			//
 			//
