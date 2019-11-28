@@ -27,61 +27,32 @@ public class Lottery {
 		//More Double Check Variables and Health Variables
 		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck;
 
+		/**
+		 * Create object from RandomArray class
+		 * 
+		 */
+		RandomArray obj = new RandomArray();
 		// Starting balance
 		List<Integer> list = new ArrayList<>();
-		list.add(200);
-		list.add(200);
-		list.add(200);
-		list.add(500);
-		list.add(500);
-		list.add(500);
-		list.add(1000);
-		list.add(1000);
-		list.add(1000);
-		list.add(2000);
-		list.add(2000);
-		list.add(5000);
-		list.add(10000);
-		// randomly select an amount from the array list
-		Lottery obj = new Lottery();
-
+		// apply the Balance
 		bankBalance = obj.getRandomList(list);
-		
-		//IQ
+		// -----------------------------------------------------------------------------
+
+		// Starting IQ
 		List<Integer> iqAtStart = new ArrayList<>();
-		iqAtStart.add(30);
-		iqAtStart.add(60);
-		iqAtStart.add(100);
-		iqAtStart.add(100);
-		iqAtStart.add(120);
-		iqAtStart.add(120);
-		iqAtStart.add(120);
-		iqAtStart.add(120);
-		iqAtStart.add(140);
-		iqAtStart.add(140);
-		iqAtStart.add(160);
-		iqAtStart.add(200);
+		// apply the IQ
+		iq = obj.getRandomIQ(iqAtStart);
+		// -----------------------------------------------------------------------------
 
-		// randomly select an amount from the array list
-		Lottery IQobj = new Lottery();
-
-		// apply the bank balance
-		iq = IQobj.getRandomIQ(iqAtStart);
-
-		//random starting age
+		// random starting age
 		List<Integer> ageAtStart = new ArrayList<>();
-		ageAtStart.add(16);
-		ageAtStart.add(18);
-		ageAtStart.add(20);
-		ageAtStart.add(24);
-		ageAtStart.add(27);
-		ageAtStart.add(30);
 
-		Lottery startAgeObject = new Lottery();
-		//applies the age
-		int age = startAgeObject.getRandomAge(ageAtStart);
+		// applies the age
+		int age = obj.getRandomAge(ageAtStart);
+		// -----------------------------------------------------------------------------
 
-		// prompt the use to enter starting balance
+
+		// prompt the user the starting balance
 		System.out.println("You started at the age of " + age + ", with a balance of: $" + w.format(bankBalance));
 		System.out.println("Your IQ is: "+iq);
 
@@ -413,25 +384,5 @@ public class Lottery {
 			age++;
 		}
 		input.close();
-	}
-
-	public int getRandomList(List<Integer> list) {
-
-		// 0-5
-		int index = ThreadLocalRandom.current().nextInt(list.size());
-		return list.get(index);
-	}
-
-	public int getRandomAge(List<Integer> age) {
-
-		// 0-5
-		int index = ThreadLocalRandom.current().nextInt(age.size());
-		return age.get(index);
-	}
-	public int getRandomIQ(List<Integer> iq) {
-
-		//IQ
-		int index = ThreadLocalRandom.current().nextInt(iq.size());
-		return iq.get(index);
 	}
 }
