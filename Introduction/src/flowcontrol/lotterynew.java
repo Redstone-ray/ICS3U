@@ -25,34 +25,63 @@ public class Lottery {
 		//Double Check System Variables
 		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2, iq;
 		//More Double Check Variables and Health Variables
-		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck;
+		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck=0;
 
-		/**
-		 * Create object from RandomArray class
-		 * 
-		 */
-		RandomArray obj = new RandomArray();
 		// Starting balance
 		List<Integer> list = new ArrayList<>();
-		// apply the Balance
+		list.add(200);
+		list.add(200);
+		list.add(200);
+		list.add(500);
+		list.add(500);
+		list.add(500);
+		list.add(1000);
+		list.add(1000);
+		list.add(1000);
+		list.add(2000);
+		list.add(2000);
+		list.add(5000);
+		list.add(10000);
+		// randomly select an amount from the array list
+		Lottery obj = new Lottery();
+
 		bankBalance = obj.getRandomList(list);
-		// -----------------------------------------------------------------------------
-
-		// Starting IQ
+		
+		//IQ
 		List<Integer> iqAtStart = new ArrayList<>();
-		// apply the IQ
-		iq = obj.getRandomIQ(iqAtStart);
-		// -----------------------------------------------------------------------------
+		iqAtStart.add(30);
+		iqAtStart.add(60);
+		iqAtStart.add(100);
+		iqAtStart.add(100);
+		iqAtStart.add(120);
+		iqAtStart.add(120);
+		iqAtStart.add(120);
+		iqAtStart.add(120);
+		iqAtStart.add(140);
+		iqAtStart.add(140);
+		iqAtStart.add(160);
+		iqAtStart.add(200);
 
-		// random starting age
+		// randomly select an amount from the array list
+		Lottery IQobj = new Lottery();
+
+		// apply the bank balance
+		iq = IQobj.getRandomIQ(iqAtStart);
+
+		//random starting age
 		List<Integer> ageAtStart = new ArrayList<>();
+		ageAtStart.add(16);
+		ageAtStart.add(18);
+		ageAtStart.add(20);
+		ageAtStart.add(24);
+		ageAtStart.add(27);
+		ageAtStart.add(30);
 
-		// applies the age
-		int age = obj.getRandomAge(ageAtStart);
-		// -----------------------------------------------------------------------------
+		Lottery startAgeObject = new Lottery();
+		//applies the age
+		int age = startAgeObject.getRandomAge(ageAtStart);
 
-
-		// prompt the user the starting balance
+		// prompt the use to enter starting balance
 		System.out.println("You started at the age of " + age + ", with a balance of: $" + w.format(bankBalance));
 		System.out.println("Your IQ is: "+iq);
 
@@ -66,8 +95,8 @@ public class Lottery {
 
 		//Trade age for extra starting interest rate
 		System.out.println("Would you like to trade some years of your life for " + d.format(intRate) + "% plus higher percent of interest rate? (To a maximum of 5 years)");
-		System.out.println("A number between 1-5 indicates the age you want to trade off: ");
-		System.out.print("Press 0 if you don't want to trade any years");
+		System.out.println("A number between 1-5 indicates the age you want to trade off");
+		System.out.print("Press 0 if you don't want to trade any years: ");
 		ageToTrade = input.nextInt();
 		if (ageToTrade >= 1 && ageToTrade <= 5) {
 			intRate += ageToTrade;
@@ -142,6 +171,7 @@ public class Lottery {
 			// lottery system
 			//
 			//
+			double n=0;
 			waitLot = 0;
 			System.out.println("");
 			System.out.print("Would you like to play lottery for $200?\nWinning will double your interest rate (Y/N): ");
@@ -151,11 +181,10 @@ public class Lottery {
 					endingBal -= 200;
 					waitLot = 1;
 					if(iq == 30) {
-					double n = (rand.nextInt(9)+1);
+					 n = (rand.nextInt(9)+1);
 					luck = 10;
 					}
 					System.out.print("Please enter a Natural Number between 1-"+luck+":" );
-					}
 					number = input.nextInt();
 					//Health Loss due to winning Lottery 2 or more times in a row
 					if (number == n) {
@@ -170,12 +199,12 @@ public class Lottery {
 							System.out.println("Try not to win multiple lotteries in an row");
 							System.out.println("");
 						}
-					} else {
+					}else {
 						System.out.println("Sorry, you lose the lottery!");
 						System.out.println("");
 						hpCheck = 0;
 					}
-				} else if (choice.equalsIgnoreCase("N")) {
+					} else if (choice.equalsIgnoreCase("N")) {
 					System.out.println("OK, no lottery");
 					System.out.println("");
 					waitLot = 1;
@@ -384,5 +413,26 @@ public class Lottery {
 			age++;
 		}
 		input.close();
+		}
+	
+
+	public int getRandomList(List<Integer> list) {
+
+		// 0-5
+		int index = ThreadLocalRandom.current().nextInt(list.size());
+		return list.get(index);
+	}
+
+	public int getRandomAge(List<Integer> age) {
+
+		// 0-5
+		int index = ThreadLocalRandom.current().nextInt(age.size());
+		return age.get(index);
+	}
+	public int getRandomIQ(List<Integer> iq) {
+
+		//IQ
+		int index = ThreadLocalRandom.current().nextInt(iq.size());
+		return iq.get(index);
 	}
 }
