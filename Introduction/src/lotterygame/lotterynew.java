@@ -152,10 +152,34 @@ public class Lottery extends MiniGameAPI {
 				if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
 					endingBal -= 200;
 					waitLot = 1;
-					if(iq == 30) 
-					{
+					if(iq == 30) {
+					
 						n = (rand.nextInt(9)+1);
 						luck = 10;
+					}
+					if(iq == 60) {
+						n = (rand.nextInt(8)+1);
+						luck = 9;
+					}
+					if(iq == 100) {
+						n = (rand.nextInt(6)+1);
+						luck = 7;
+					}
+					if(iq == 120) {
+						n = (rand.nextInt(5)+1);
+						luck = 6;
+					}
+					if(iq == 140) {
+						n = (rand.nextInt(4)+1);
+						luck = 5;
+					}
+					if(iq == 160) {
+						n = (rand.nextInt(3)+1);
+						luck = 4;
+					}
+					if(iq == 200) {
+						n = (rand.nextInt(2)+1);
+						luck = 3;
 					}
 					System.out.print("Please enter a Natural Number between 1-"+luck+":" );
 					
