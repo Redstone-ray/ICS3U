@@ -25,7 +25,7 @@ public class Lottery {
 		//Double Check System Variables
 		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2, iq;
 		//More Double Check Variables and Health Variables
-		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck;
+		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck=0;
 
 		/**
 		 * Create object from RandomArray class
@@ -143,6 +143,7 @@ public class Lottery {
 			//
 			//
 			waitLot = 0;
+			double n=0;
 			System.out.println("");
 			System.out.print("Would you like to play lottery for $200?\nWinning will double your interest rate (Y/N): ");
 			while (waitLot == 0) {
@@ -150,12 +151,13 @@ public class Lottery {
 				if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
 					endingBal -= 200;
 					waitLot = 1;
-					if(iq == 30) {
-					double n = (rand.nextInt(9)+1);
-					luck = 10;
+					if(iq == 30) 
+					{
+						n = (rand.nextInt(9)+1);
+						luck = 10;
 					}
 					System.out.print("Please enter a Natural Number between 1-"+luck+":" );
-					}
+					
 					number = input.nextInt();
 					//Health Loss due to winning Lottery 2 or more times in a row
 					if (number == n) {
@@ -175,7 +177,9 @@ public class Lottery {
 						System.out.println("");
 						hpCheck = 0;
 					}
-				} else if (choice.equalsIgnoreCase("N")) {
+				}
+			
+			else if (choice.equalsIgnoreCase("N")) {
 					System.out.println("OK, no lottery");
 					System.out.println("");
 					waitLot = 1;
@@ -188,6 +192,7 @@ public class Lottery {
 					System.out.println("Please only use 'Y' for Yes and 'N' for No");
 				}
 			}
+		}
 			
 			// end of lottery system
 			//
@@ -382,7 +387,7 @@ public class Lottery {
 			}
 			System.out.println("-----------------------------------------");
 			age++;
+			input.close();
 		}
-		input.close();
+		
 	}
-}
