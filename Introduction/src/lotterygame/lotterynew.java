@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import minigame.MiniGameAPI;
 
 
-public class Lottery {
+public class Lottery extends MiniGameAPI {
 	public static void main(String[] args) {
 		Scanner input= new Scanner(System.in);
 		String choice;
