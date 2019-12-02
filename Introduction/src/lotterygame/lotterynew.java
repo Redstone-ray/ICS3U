@@ -1,4 +1,4 @@
-package flowcontrol;
+package lotterygame;
 
 
 import java.text.DecimalFormat;
