@@ -1,4 +1,4 @@
-package flowcontrol;
+package minigame;
 
 import java.util.ArrayList;
 import java.util.List;
