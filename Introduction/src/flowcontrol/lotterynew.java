@@ -84,6 +84,9 @@ public class Lottery {
 		// prompt the use to enter starting balance
 		System.out.println("You started at the age of " + age + ", with a balance of: $" + w.format(bankBalance));
 		System.out.println("Your IQ is: "+iq);
+		if (iq == 30) {
+			System.out.println("You Are Stupid");
+		}
 
 		//Health
 		System.out.println("Your HP is currently at 100");
@@ -181,9 +184,33 @@ public class Lottery {
 					endingBal -= 200;
 					waitLot = 1;
 					if(iq == 30) {
-					 n = (rand.nextInt(9)+1);
+					 n = (rand.nextInt(8)+1);
 					luck = 10;
 					}
+					else if(iq == 60) {
+						 n = (rand.nextInt(8)+1);
+						luck = 9;
+						}
+					else if(iq == 100) {
+						 n = (rand.nextInt(7)+1);
+						luck = 8;
+						}
+					else if(iq == 120) {
+						 n = (rand.nextInt(6)+1);
+						luck = 6;
+						}
+					else if(iq == 140) {
+						 n = (rand.nextInt(5)+1);
+						luck = 5;
+						}
+					else if(iq == 160) {
+						 n = (rand.nextInt(4)+1);
+						luck = 4;
+						}
+					else if(iq == 200) {
+						 n = (rand.nextInt(2)+1);
+						luck = 3;
+						}
 					System.out.print("Please enter a Natural Number between 1-"+luck+":" );
 					number = input.nextInt();
 					//Health Loss due to winning Lottery 2 or more times in a row
