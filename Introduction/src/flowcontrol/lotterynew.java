@@ -1,9 +1,6 @@
-package flowcontrol;
+package lotterygame;
 
-import static java.lang.System.in;
 
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -14,8 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Lottery {
-	@SuppressWarnings("deprecation")
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Scanner input= new Scanner(System.in);
 		String choice;
 		double bankBalance, intRate, endingBal, trumpStock;
@@ -27,44 +23,41 @@ public class Lottery {
 		Random stockUse = new Random();
 		String yesorno, heal, heal2;
 		//Double Check System Variables
-		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2;
+		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2, iq;
 		//More Double Check Variables and Health Variables
-		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0;
+		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck=0;
 
+		/**
+		 * Create object from RandomArray class
+		 * 
+		 */
+		RandomArray obj = new RandomArray();
 		// Starting balance
 		List<Integer> list = new ArrayList<>();
-		list.add(200);
-		list.add(200);
-		list.add(200);
-		list.add(500);
-		list.add(500);
-		list.add(500);
-		list.add(1000);
-		list.add(1000);
-		list.add(1000);
-		list.add(2000);
-		list.add(2000);
-		list.add(5000);
-		list.add(10000);
-		// randomly select an amount from the array list
-		Lottery obj = new Lottery();
-
-		// apply the bank balance
+		// apply the Balance
 		bankBalance = obj.getRandomList(list);
+		// -----------------------------------------------------------------------------
 
-		//random starting age
+		// Starting IQ
+		List<Integer> iqAtStart = new ArrayList<>();
+		// apply the IQ
+		iq = obj.getRandomIQ(iqAtStart);
+		// -----------------------------------------------------------------------------
+
+		// random starting age
 		List<Integer> ageAtStart = new ArrayList<>();
-		ageAtStart.add(16);
-		ageAtStart.add(18);
-		ageAtStart.add(20);
-		ageAtStart.add(24);
-		ageAtStart.add(27);
-		ageAtStart.add(30);
-		Lottery startAgeObject = new Lottery();
-		//applys the age
-		int age = startAgeObject.getRandomAge(ageAtStart);
-		// prompt the use to enter starting balance
+
+		// applies the age
+		int age = obj.getRandomAge(ageAtStart);
+		// -----------------------------------------------------------------------------
+
+
+		// prompt the user the starting balance
 		System.out.println("You started at the age of " + age + ", with a balance of: $" + w.format(bankBalance));
+		System.out.println("Your IQ is: "+iq);
+		if (iq == 30) {
+			System.out.println("You are stupid");
+		}
 
 		//Health
 		System.out.println("Your HP is currently at 100");
@@ -76,7 +69,8 @@ public class Lottery {
 
 		//Trade age for extra starting interest rate
 		System.out.println("Would you like to trade some years of your life for " + d.format(intRate) + "% plus higher percent of interest rate? (To a maximum of 5 years)");
-		System.out.print("A number between 0-5 indicates the age you want to trade off: ");
+		System.out.println("A number between 1-5 indicates the age you want to trade off ");
+		System.out.print("Press 0 if you don't want to trade any years: ");
 		ageToTrade = input.nextInt();
 		if (ageToTrade >= 1 && ageToTrade <= 5) {
 			intRate += ageToTrade;
@@ -90,11 +84,14 @@ public class Lottery {
 		System.out.println("----------------------------------------");
 		endingBal = bankBalance + bankBalance * (intRate / 100);
 
-		//set a value for trumpstock, stock 1
+		//set a value for trumpStock, stock 1
 		trumpStock = 125.5 + (603.5 - 125.5) * stockUse.nextDouble();
 
-		while (age <= 80) {
+		while (age < 80) {
 			System.out.println("The balance at age " + age + " is $" + d.format(endingBal));
+			if(age == 79) {
+				System.out.println("You are going to die next year");
+			}
 			endingBal = endingBal + endingBal * (intRate / 100);
 			//Cancer
 			if (age >= 55 && sick == 0) {
@@ -115,7 +112,7 @@ public class Lottery {
 					System.out.print("Do you wish to heal yourself? (Y/N): ");
 					heal = input.nextLine();
 					if (heal.equalsIgnoreCase("y")) {
-						System.out.print("Healing will cost $" + ((100 - health) * (10 * age)) + "(Y/N): ");
+						System.out.print("Healing will cost $" + ((100 - health) * (10 * age )) + "(Y/N): ");
 						waitHeal = 1;
 						heal2 = input.nextLine();
 						while (waitHeal2 == 0) {
@@ -152,15 +149,46 @@ public class Lottery {
 			//
 			//
 			waitLot = 0;
+			double n=0;
 			System.out.println("");
 			System.out.print("Would you like to play lottery for $200?\nWinning will double your interest rate (Y/N): ");
 			while (waitLot == 0) {
 				choice = input.nextLine();
 				if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
+					
 					endingBal -= 200;
 					waitLot = 1;
-					double n = (rand.nextInt(4)+1);
-					System.out.print("Please enter a Natural Number between 1-5: ");
+					if(iq == 30) {
+					
+						n = (rand.nextInt(9)+1);
+						luck = 10;
+					}
+					if(iq == 60) {
+						n = (rand.nextInt(8)+1);
+						luck = 9;
+					}
+					if(iq == 100) {
+						n = (rand.nextInt(6)+1);
+						luck = 7;
+					}
+					if(iq == 120) {
+						n = (rand.nextInt(5)+1);
+						luck = 6;
+					}
+					if(iq == 140) {
+						n = (rand.nextInt(4)+1);
+						luck = 5;
+					}
+					if(iq == 160) {
+						n = (rand.nextInt(3)+1);
+						luck = 4;
+					}
+					if(iq == 200) {
+						n = (rand.nextInt(2)+1);
+						luck = 3;
+					}
+					System.out.print("Please enter a Natural Number between 1-"+luck+":" );
+					
 					number = input.nextInt();
 					//Health Loss due to winning Lottery 2 or more times in a row
 					if (number == n) {
@@ -180,7 +208,10 @@ public class Lottery {
 						System.out.println("");
 						hpCheck = 0;
 					}
-				} else if (choice.equalsIgnoreCase("N")) {
+				}
+			
+			
+			else if (choice.equalsIgnoreCase("N")) {
 					System.out.println("OK, no lottery");
 					System.out.println("");
 					waitLot = 1;
@@ -193,6 +224,8 @@ public class Lottery {
 					System.out.println("Please only use 'Y' for Yes and 'N' for No");
 				}
 			}
+		
+			
 			// end of lottery system
 			//
 			//
@@ -216,79 +249,79 @@ public class Lottery {
 					trumpStock = trumpStock * 0.9;
 				}
 				String plusOrMinus = "";
-					waitStock = 1;
-					System.out.println("*******************");
-					System.out.println("Here are the current stock(s) open today");
-					System.out.println();
-					System.out.println("Stock name\t\tPrice\tChange");
-					//Show percent increase/decrease
-					if (stockIncreaseDecrease <= 3) {
-						plusOrMinus = "+" + d.format(stockChangeAmount * 100) + "%";
-					} else if (stockIncreaseDecrease <= 7) {
-						plusOrMinus = "-" + d.format(stockChangeAmount * 100) + "%";
-					} else if (stockIncreaseDecrease == 8) {
-						plusOrMinus = "+10%";
-					} else if (stockIncreaseDecrease == 9) {
-						plusOrMinus = "-10%";
-					}
-					waitBuy = 0;
-					waitSell = 0;
-					System.out.println("1.TrumpStock\t" +"\t$"+ d.format(trumpStock) + "\t" + plusOrMinus);
-					System.out.println("*******************");
-					System.out.print("Press 'B' for buy, 'S' for sell, enter 'N' to proceed to the next year: ");
-					int buyOrSellAmount;
-					while (waitStock2 == 0) {
-						String buyOrSell = input.nextLine();
-						//buy, add current amount of stock
-						if (buyOrSell.equalsIgnoreCase("b")) {
+				waitStock = 1;
+				System.out.println("*******************");
+				System.out.println("Here are the current stock(s) open today");
+				System.out.println();
+				System.out.println("Stock name\t\tPrice\tChange");
+				//Show percent increase/decrease
+				if (stockIncreaseDecrease <= 3) {
+					plusOrMinus = "+" + d.format(stockChangeAmount * 100) + "%";
+				} else if (stockIncreaseDecrease <= 7) {
+					plusOrMinus = "-" + d.format(stockChangeAmount * 100) + "%";
+				} else if (stockIncreaseDecrease == 8) {
+					plusOrMinus = "+10%";
+				} else if (stockIncreaseDecrease == 9) {
+					plusOrMinus = "-10%";
+				}
+				waitBuy = 0;
+				waitSell = 0;
+				System.out.println("1.TrumpStock\t" +"\t$"+ d.format(trumpStock) + "\t" + plusOrMinus);
+				System.out.println("*******************");
+				System.out.print("Press 'B' for buy, 'S' for sell, enter 'N' to proceed to the next year: ");
+				int buyOrSellAmount;
+				while (waitStock2 == 0) {
+					String buyOrSell = input.nextLine();
+					//buy, add current amount of stock
+					if (buyOrSell.equalsIgnoreCase("b")) {
+						waitStock2 = 1;
+						System.out.print("Input buy amount(number of stocks)(Enter 0 to cancel): ");
+						while (waitBuy == 0) {
+							buyOrSellAmount = input.nextInt();
+							//check for enough money
+							if (buyOrSellAmount > 0 && endingBal >= trumpStock * buyOrSellAmount) {
+								endingBal = endingBal - trumpStock * buyOrSellAmount;
+								trumpStockNumber += buyOrSellAmount;
+								System.out.println("Success, you purchased " + buyOrSellAmount + " stock(s)");
+								System.out.println("You now have " + trumpStockNumber + " stock(s)");
+								waitBuy = 1;
+							} else if (buyOrSellAmount == 0) {
+								System.out.println("OK");
+								waitBuy = 1;
+							} else {
+								System.out.println("Invaild number, you might not have enough money");
+							}
+						}
+					} else if (buyOrSell.equalsIgnoreCase("s")) {
+						if (trumpStockNumber == 0) {
+							System.out.println("You don't have any stocks, please buy before selling");
+						} else {
+							System.out.print("Input sell amount(number of stocks)(Enter 0 to cancel): ");
 							waitStock2 = 1;
-							System.out.print("Input buy amount(number of stocks)(Enter 0 to cancel): ");
-							while (waitBuy == 0) {
+							while (waitSell == 0) {
 								buyOrSellAmount = input.nextInt();
-								//check for enough money
-								if (buyOrSellAmount > 0 && endingBal >= trumpStock * buyOrSellAmount) {
-									endingBal = endingBal - trumpStock * buyOrSellAmount;
-									trumpStockNumber += buyOrSellAmount;
-									System.out.println("Success, you purchased " + buyOrSellAmount + " stock(s)");
+								if (trumpStockNumber >= buyOrSellAmount) {
+									endingBal = endingBal + trumpStock * buyOrSellAmount;
+									trumpStockNumber -= buyOrSellAmount;
+									System.out.println("Success, you sold " + buyOrSellAmount + " stock(s)");
 									System.out.println("You now have " + trumpStockNumber + " stock(s)");
-									waitBuy = 1;
+									waitSell = 1;
 								} else if (buyOrSellAmount == 0) {
 									System.out.println("OK");
-									waitBuy = 1;
+									waitSell = 1;
 								} else {
-									System.out.println("Invaild number, you might not have enough money");
+									System.out.println("Sorry, that is an invaild number, please enter a number within the amount you have: " + trumpStockNumber);
 								}
 							}
-						} else if (buyOrSell.equalsIgnoreCase("s")) {
-							if (trumpStockNumber == 0) {
-								System.out.println("You don't have any stocks, please buy before selling");
-							} else {
-								System.out.print("Input sell amount(number of stocks)(Enter 0 to cancel): ");
-								waitStock2 = 1;
-								while (waitSell == 0) {
-									buyOrSellAmount = input.nextInt();
-									if (trumpStockNumber >= buyOrSellAmount) {
-										endingBal = endingBal + trumpStock * buyOrSellAmount;
-										trumpStockNumber -= buyOrSellAmount;
-										System.out.println("Success, you sold " + buyOrSellAmount + " stock(s)");
-										System.out.println("You now have " + trumpStockNumber + " stock(s)");
-										waitSell = 1;
-									} else if (buyOrSellAmount == 0) {
-										System.out.println("OK");
-										waitSell = 1;
-									} else {
-										System.out.println("Sorry, that is an invaild number, please enter a number within the amount you have: " + trumpStockNumber);
-									}
-								}
-							}
-						} else if (buyOrSell.equalsIgnoreCase("n")) {
-							System.out.println("OK, proceeding to next year");
-							waitStock2 = 1;
-						} else {
-							System.out.println("Please only enter 'B', 'S' or 'N'");
 						}
+					} else if (buyOrSell.equalsIgnoreCase("n")) {
+						System.out.println("OK, proceeding to next year");
+						waitStock2 = 1;
+					} else {
+						System.out.println("Please only enter 'B', 'S' or 'N'");
 					}
-				
+				}
+
 			}
 			//Sick System
 			if (sick == 1) {
@@ -386,20 +419,10 @@ public class Lottery {
 			}
 			System.out.println("-----------------------------------------");
 			age++;
+			
 		}
-	}
-
-	public int getRandomList(List<Integer> list) {
-
-		// 0-5
-		int index = ThreadLocalRandom.current().nextInt(list.size());
-		return list.get(index);
-	}
-
-	public int getRandomAge(List<Integer> age) {
-
-		// 0-5
-		int index = ThreadLocalRandom.current().nextInt(age.size());
-		return age.get(index);
-	}
+		System.out.println("You have died of old age\nGAME OVER\nYour final Bank Balance is $"+d.format(endingBal));
+		input.close();
+  }
 }
+
