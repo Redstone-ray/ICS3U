@@ -1,6 +1,5 @@
 package lotterygame;
 
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -9,10 +8,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 public class Lottery {
 	public static void main(String[] args) {
-		Scanner input= new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
 		String choice;
 		double bankBalance, intRate, endingBal, trumpStock;
 		int number, ageToTrade, trumpStockNumber = 0;
@@ -22,10 +20,10 @@ public class Lottery {
 		Random startingRate = new Random();
 		Random stockUse = new Random();
 		String yesorno, heal, heal2;
-		//Double Check System Variables
+		// Double Check System Variables
 		int waiter = 0, waitHeal, waitHeal2, waitLot, waitStock, waitStock2, iq;
-		//More Double Check Variables and Health Variables
-		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck=0;
+		// More Double Check Variables and Health Variables
+		int waitBuy, waitSell, health = 100, hpCheck = 0, sick = 0, luck = 0;
 
 		/**
 		 * Create object from RandomArray class
@@ -51,15 +49,14 @@ public class Lottery {
 		int age = obj.getRandomAge(ageAtStart);
 		// -----------------------------------------------------------------------------
 
-
 		// prompt the user the starting balance
 		System.out.println("You started at the age of " + age + ", with a balance of: $" + w.format(bankBalance));
-		System.out.println("Your IQ is: "+iq);
+		System.out.println("Your IQ is: " + iq);
 		if (iq == 30) {
 			System.out.println("You are stupid");
 		}
 
-		//Health
+		// Health
 		System.out.println("Your HP is currently at 100");
 		System.out.println("");
 
@@ -67,15 +64,16 @@ public class Lottery {
 		intRate = 2.5 + (8.5 - 2.5) * startingRate.nextDouble();
 		System.out.println("Your rate of interest is " + d.format(intRate) + "%, good luck!");
 
-		//Trade age for extra starting interest rate
-		System.out.println("Would you like to trade some years of your life for " + d.format(intRate) + "% plus higher percent of interest rate? (To a maximum of 5 years)");
+		// Trade age for extra starting interest rate
+		System.out.println("Would you like to trade some years of your life for " + d.format(intRate)
+				+ "% plus higher percent of interest rate? (To a maximum of 5 years)");
 		System.out.println("A number between 1-5 indicates the age you want to trade off ");
 		System.out.print("Press 0 if you don't want to trade any years: ");
 		ageToTrade = input.nextInt();
 		if (ageToTrade >= 1 && ageToTrade <= 5) {
 			intRate += ageToTrade;
 			age += ageToTrade;
-			//show a message of new age if the user input a ageToTrade>0
+			// show a message of new age if the user input a ageToTrade>0
 			System.out.println("Success, your new interest is now: " + d.format(intRate) + "%");
 			System.out.println(ageToTrade + " year(s) had been added to your age, you are now " + age);
 		} else if (ageToTrade == 0) {
@@ -84,35 +82,35 @@ public class Lottery {
 		System.out.println("----------------------------------------");
 		endingBal = bankBalance + bankBalance * (intRate / 100);
 
-		//set a value for trumpStock, stock 1
+		// set a value for trumpStock, stock 1
 		trumpStock = 125.5 + (603.5 - 125.5) * stockUse.nextDouble();
 
 		while (age < 80) {
 			System.out.println("The balance at age " + age + " is $" + d.format(endingBal));
-			if(age == 79) {
+			if (age == 79) {
 				System.out.println("You are going to die next year");
 			}
 			endingBal = endingBal + endingBal * (intRate / 100);
-			//Cancer
+			// Cancer
 			if (age >= 55 && sick == 0) {
-				int sickRand = (rand.nextInt(14)+1);
+				int sickRand = (rand.nextInt(14) + 1);
 				if (sickRand == 5) {
 					System.out.println("You now have an incurable disease, you will lose 20 HP every year");
 					sick = 1;
 				}
 			}
 
-			//Healing System
+			// Healing System
 			System.out.println("Your HP is currently at " + health);
 			if (health < 100) {
 				waitHeal = 0;
 				waitHeal2 = 0;
-				//asks to heal
+				// asks to heal
 				while (waitHeal == 0) {
 					System.out.print("Do you wish to heal yourself? (Y/N): ");
 					heal = input.nextLine();
 					if (heal.equalsIgnoreCase("y")) {
-						System.out.print("Healing will cost $" + ((100 - health) * (10 * age )) + "(Y/N): ");
+						System.out.print("Healing will cost $" + ((100 - health) * (10 * age)) + "(Y/N): ");
 						waitHeal = 1;
 						heal2 = input.nextLine();
 						while (waitHeal2 == 0) {
@@ -144,53 +142,53 @@ public class Lottery {
 			}
 			// End of Healing System
 
-
 			// lottery system
 			//
 			//
 			waitLot = 0;
-			double n=0;
+			double n = 0;
 			System.out.println("");
-			System.out.print("Would you like to play lottery for $200?\nWinning will double your interest rate (Y/N): ");
+			System.out
+					.print("Would you like to play lottery for $200?\nWinning will double your interest rate (Y/N): ");
 			while (waitLot == 0) {
 				choice = input.nextLine();
 				if (choice.equalsIgnoreCase("Y") && endingBal >= 200) {
-					
+
 					endingBal -= 200;
 					waitLot = 1;
-					if(iq == 30) {
-					
-						n = (rand.nextInt(9)+1);
+					if (iq == 30) {
+
+						n = (rand.nextInt(9) + 1);
 						luck = 10;
 					}
-					if(iq == 60) {
-						n = (rand.nextInt(8)+1);
+					if (iq == 60) {
+						n = (rand.nextInt(8) + 1);
 						luck = 9;
 					}
-					if(iq == 100) {
-						n = (rand.nextInt(6)+1);
+					if (iq == 100) {
+						n = (rand.nextInt(6) + 1);
 						luck = 7;
 					}
-					if(iq == 120) {
-						n = (rand.nextInt(5)+1);
+					if (iq == 120) {
+						n = (rand.nextInt(5) + 1);
 						luck = 6;
 					}
-					if(iq == 140) {
-						n = (rand.nextInt(4)+1);
+					if (iq == 140) {
+						n = (rand.nextInt(4) + 1);
 						luck = 5;
 					}
-					if(iq == 160) {
-						n = (rand.nextInt(3)+1);
+					if (iq == 160) {
+						n = (rand.nextInt(3) + 1);
 						luck = 4;
 					}
-					if(iq == 200) {
-						n = (rand.nextInt(2)+1);
+					if (iq == 200) {
+						n = (rand.nextInt(2) + 1);
 						luck = 3;
 					}
-					System.out.print("Please enter a Natural Number between 1-"+luck+":" );
-					
+					System.out.print("Please enter a Natural Number between 1-" + luck + ":");
+
 					number = input.nextInt();
-					//Health Loss due to winning Lottery 2 or more times in a row
+					// Health Loss due to winning Lottery 2 or more times in a row
 					if (number == n) {
 						intRate += intRate;
 						System.out.println("The number is correct! Your Interest Rate is now %" + d.format(intRate));
@@ -209,9 +207,8 @@ public class Lottery {
 						hpCheck = 0;
 					}
 				}
-			
-			
-			else if (choice.equalsIgnoreCase("N")) {
+
+				else if (choice.equalsIgnoreCase("N")) {
 					System.out.println("OK, no lottery");
 					System.out.println("");
 					waitLot = 1;
@@ -224,13 +221,12 @@ public class Lottery {
 					System.out.println("Please only use 'Y' for Yes and 'N' for No");
 				}
 			}
-		
-			
+
 			// end of lottery system
 			//
 			//
 
-			//Start of stock system
+			// Start of stock system
 			waitStock = 0;
 			waitStock2 = 0;
 			System.out.println("You have " + trumpStockNumber + " trumpStock(s) on your account");
@@ -238,10 +234,10 @@ public class Lottery {
 				double stockIncreaseDecrease = rand.nextInt(8);
 				double stockChangeAmount = 0.0 + (0.10 - 0.0) * stockUse.nextDouble();
 				if (stockIncreaseDecrease <= 3) {
-					//increase the stock by percent
+					// increase the stock by percent
 					trumpStock += trumpStock * stockChangeAmount;
 				} else if (stockIncreaseDecrease <= 7) {
-					//decrease the stock
+					// decrease the stock
 					trumpStock -= trumpStock * stockChangeAmount;
 				} else if (stockIncreaseDecrease == 8) {
 					trumpStock = trumpStock * 1.1;
@@ -254,7 +250,7 @@ public class Lottery {
 				System.out.println("Here are the current stock(s) open today");
 				System.out.println();
 				System.out.println("Stock name\t\tPrice\tChange");
-				//Show percent increase/decrease
+				// Show percent increase/decrease
 				if (stockIncreaseDecrease <= 3) {
 					plusOrMinus = "+" + d.format(stockChangeAmount * 100) + "%";
 				} else if (stockIncreaseDecrease <= 7) {
@@ -266,19 +262,19 @@ public class Lottery {
 				}
 				waitBuy = 0;
 				waitSell = 0;
-				System.out.println("1.TrumpStock\t" +"\t$"+ d.format(trumpStock) + "\t" + plusOrMinus);
+				System.out.println("1.TrumpStock\t" + "\t$" + d.format(trumpStock) + "\t" + plusOrMinus);
 				System.out.println("*******************");
 				System.out.print("Press 'B' for buy, 'S' for sell, enter 'N' to proceed to the next year: ");
 				int buyOrSellAmount;
 				while (waitStock2 == 0) {
 					String buyOrSell = input.nextLine();
-					//buy, add current amount of stock
+					// buy, add current amount of stock
 					if (buyOrSell.equalsIgnoreCase("b")) {
 						waitStock2 = 1;
 						System.out.print("Input buy amount(number of stocks)(Enter 0 to cancel): ");
 						while (waitBuy == 0) {
 							buyOrSellAmount = input.nextInt();
-							//check for enough money
+							// check for enough money
 							if (buyOrSellAmount > 0 && endingBal >= trumpStock * buyOrSellAmount) {
 								endingBal = endingBal - trumpStock * buyOrSellAmount;
 								trumpStockNumber += buyOrSellAmount;
@@ -310,7 +306,9 @@ public class Lottery {
 									System.out.println("OK");
 									waitSell = 1;
 								} else {
-									System.out.println("Sorry, that is an invaild number, please enter a number within the amount you have: " + trumpStockNumber);
+									System.out.println(
+											"Sorry, that is an invaild number, please enter a number within the amount you have: "
+													+ trumpStockNumber);
 								}
 							}
 						}
@@ -323,17 +321,16 @@ public class Lottery {
 				}
 
 			}
-			//Sick System
+			// Sick System
 			if (sick == 1) {
 				health = health - 20;
 			}
-			//Did you Die?
+			// Did you Die?
 			if (health <= 0) {
 				System.out.println("");
 				System.out.println("You ran out of HP!\nYou Lost!");
 				System.exit(0);
 			}
-
 
 			System.out.println("-----------------------------------------");
 			System.out.println("You have reached the level:");
@@ -341,7 +338,7 @@ public class Lottery {
 			String lvl = "";
 			int lvlmon = 0;
 
-			//Determines Level
+			// Determines Level
 			if (endingBal <= 50) {
 				System.out.println("Lvl 1: Slave");
 				lvl = "Poor";
@@ -399,8 +396,7 @@ public class Lottery {
 					yesorno = input.nextLine();
 					if (yesorno.equalsIgnoreCase("n")) {
 						System.exit(0);
-					} else if
-					(yesorno.equalsIgnoreCase("y")) {
+					} else if (yesorno.equalsIgnoreCase("y")) {
 						System.out.println("OK");
 						waiter = 1;
 						lvl = "Donald Trump";
@@ -419,10 +415,9 @@ public class Lottery {
 			}
 			System.out.println("-----------------------------------------");
 			age++;
-			
-		}
-		System.out.println("You have died of old age\nGAME OVER\nYour final Bank Balance is $"+d.format(endingBal));
-		input.close();
-  }
-}
 
+		}
+		System.out.println("You have died of old age\nGAME OVER\nYour final Bank Balance is $" + d.format(endingBal));
+		input.close();
+	}
+}
