@@ -12,7 +12,7 @@ public class Lottery {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		String choice;
-		double bankBalance, intRate, endingBal, trumpStock;
+		double bankBalance, intRate, endingBal, trumpStock, n = 0;
 		int number, ageToTrade, trumpStockNumber = 0;
 		NumberFormat d = new DecimalFormat("#0.00");
 		NumberFormat w = new DecimalFormat("#0");
@@ -27,7 +27,7 @@ public class Lottery {
 
 		/**
 		 * Create object from RandomArray class
-		 * 
+		 *
 		 */
 		RandomArray obj = new RandomArray();
 		// Starting balance
@@ -146,7 +146,6 @@ public class Lottery {
 			//
 			//
 			waitLot = 0;
-			double n = 0;
 			System.out.println("");
 			System.out
 					.print("Would you like to play lottery for $200?\nWinning will double your interest rate (Y/N): ");
@@ -158,31 +157,31 @@ public class Lottery {
 					waitLot = 1;
 					if (iq == 30) {
 
-						n = (rand.nextInt(9) + 1);
+						n = (rand.nextInt(10) + 1);
 						luck = 10;
 					}
 					if (iq == 60) {
-						n = (rand.nextInt(8) + 1);
+						n = (rand.nextInt(9) + 1);
 						luck = 9;
 					}
 					if (iq == 100) {
-						n = (rand.nextInt(6) + 1);
+						n = (rand.nextInt(7) + 1);
 						luck = 7;
 					}
 					if (iq == 120) {
-						n = (rand.nextInt(5) + 1);
+						n = (rand.nextInt(6) + 1);
 						luck = 6;
 					}
 					if (iq == 140) {
-						n = (rand.nextInt(4) + 1);
+						n = (rand.nextInt(5) + 1);
 						luck = 5;
 					}
 					if (iq == 160) {
-						n = (rand.nextInt(3) + 1);
+						n = (rand.nextInt(4) + 1);
 						luck = 4;
 					}
 					if (iq == 200) {
-						n = (rand.nextInt(2) + 1);
+						n = (rand.nextInt(3) + 1);
 						luck = 3;
 					}
 					System.out.print("Please enter a Natural Number between 1-" + luck + ":");
