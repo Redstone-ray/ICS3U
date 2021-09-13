@@ -1,4 +1,4 @@
-# This is for any project/code done in class ICS3U1
+# This is for all project/code done in class ICS3U
 # A grade eleven computer science course, using java
 # This course is offered in Ontario, Canada. It will vary depending on locations
-PS: You may use this code for any purpose, except while during a test.
+Please note: the code may contains snytax errors or have ambiguous/unclear variable names, please do your own testing
